@@ -16,7 +16,7 @@ async def main():
 
     # 設定MCP文件系統伺服器參數
     # 這個伺服器用於寫入本地文件
-    write_mcp_server = StdioServerParams(command="npx", args=["-y", "@modelcontextprotocol/server-filesystem", "C:/Users/Bob/Desktop/manus_agent"])
+    write_mcp_server = StdioServerParams(command="node", args=["C:/Users/Bob/Documents/Cline/MCP/servers/src/filesystem/dist/index.js", "C:/Users/Bob/Desktop/manus_agent"])
     
     # 從MCP伺服器獲取fetch工具
     tools_fetch = await mcp_server_tools(fetch_mcp_server)
@@ -60,7 +60,7 @@ async def main():
         name="content_writer",
         model_client=OllamaChatCompletionClient(model="llama3.1"),
         tools=tools_write,
-        system_message="""你是一個文件助手。使用filesystem工具將content_rewriter提供的內容寫入txt文件，文件以日期命名（格式為{current_date}.txt）。
+        system_message=f"""你是一個文件助手。使用filesystem工具將content_rewriter提供的內容寫入txt文件，文件以日期命名（格式為{current_date}.txt）。
         當你成功將文件寫入後，回覆"TERMINATE"以結束對話。"""
     )
     

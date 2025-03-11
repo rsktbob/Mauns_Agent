@@ -11,16 +11,10 @@ from datetime import datetime
 async def main():
     # 設定 MCP 獲取伺服器參數
     fetch_mcp_server = StdioServerParams(command="node", args=["C:/Users/Bob/Documents/Cline/MCP/fetch-mcp/dist/index.js"])
-    
-    # 設定MCP文件系統伺服器參數
-    # 這個伺服器用於寫入本地文件
-    write_mcp_server = StdioServerParams(command="npx", args=["-y", "@modelcontextprotocol/server-filesystem", "C:/Users/Bob/Desktop/manus_agent"])
 
-    # 從 MCP 伺服器獲取工具
+    # # 從 MCP 伺服器獲取工具
     tools_fetch = await mcp_server_tools(fetch_mcp_server)
     
-    # # 從MCP伺服器獲取filesystem工具
-    # tools_write = await mcp_server_tools(write_mcp_server)
     
     # 創建獲取代理，並包含 MCP 獲取工具
     fetch_agent = AssistantAgent(
